@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShip : MonoBehaviour {
     private int speed = 9;
+	private bool invincible = false;
 	public GameObject[] spawnPrefab;
 	public GameObject[] prefabClone;
     // Use this for initialization
@@ -20,7 +21,7 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision col){
-		if (col.gameObject.name != "Bullet(Clone)") {
+		if (col.gameObject.name != "Bullet(Clone)" && !invincible) {
 			GameState.jumps -= 1;
 			gameObject.SetActive(false);
 			if(GameState.jumps > 0)
@@ -29,7 +30,7 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	private void Respawn(){
-
+		invincible = true;
 		if (GameObject.Find ("Sphere7").tag == "on")
 			transform.position = GameObject.Find ("Sphere7").transform.position;
 		else if (GameObject.Find ("Sphere6").tag == "on")
@@ -56,7 +57,8 @@ public class PlayerShip : MonoBehaviour {
 			Respawn ();
 			return;
 		}
-		gameObject.SetActive(true);
+		gameObject.SetActive (true);
+		Invoke ("NotInvincible", 1.5f);
 	}
 
 	private void Fire(){
@@ -167,5 +169,8 @@ public class PlayerShip : MonoBehaviour {
         transform.Rotate(Input.GetAxisRaw("Vertical") * ySpeed, 0, 0, Space.Self);
 
     }
+	void NotInvincible(){
+		invincible = false;
+	}
   
 }

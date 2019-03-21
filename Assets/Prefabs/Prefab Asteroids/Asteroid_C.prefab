@@ -149,3 +149,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  explosion1: {fileID: 1438029925448420, guid: d3c6c52cb0cfc45b49a8c737909a5143, type: 2}
+  explosion2: {fileID: 1354818852030122, guid: e3f5b34dbfb8e474cb1b9548eec1f591, type: 2}
